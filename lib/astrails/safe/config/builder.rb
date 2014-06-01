@@ -72,7 +72,8 @@ module Astrails
         multi_value :skip_tables, :exclude, :files
         hash_value :mysqldump, :tar, :gpg, :keep, :pgdump, :tar, :svndump,
           :sftp, :ftp, :mongodump
-        mixed_value :s3, :local, :cloudfiles
+        # mixed_value :s3, :local, :cloudfiles
+        mixed_value :local, :fog
         collection :database, :archive, :repo
 
         private

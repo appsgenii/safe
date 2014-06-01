@@ -1,7 +1,7 @@
 require "astrails/safe/version"
 
-require "aws/s3"
-require "cloudfiles"
+# require "aws/s3"
+require "fog"
 require 'net/sftp'
 require 'net/ftp'
 require 'fileutils'
@@ -32,8 +32,8 @@ require 'astrails/safe/gzip'
 
 require 'astrails/safe/sink'
 require 'astrails/safe/local'
-require 'astrails/safe/s3'
-require 'astrails/safe/cloudfiles'
+# require 'astrails/safe/s3'
+require 'astrails/safe/fog'
 require 'astrails/safe/sftp'
 require 'astrails/safe/ftp'
 
@@ -55,7 +55,8 @@ module Astrails
       ].each do |klass, path|
         if collection = config[*path]
           collection.each do |name, c|
-            klass.new(name, c).backup.run(c, :gpg, :gzip, :local, :s3, :cloudfiles, :sftp, :ftp)
+            # klass.new(name, c).backup.run(c, :gpg, :gzip, :local, :s3, :cloudfiles, :sftp, :ftp)
+            klass.new(name, c).backup.run(c, :gpg, :gzip, :local, :fog, :sftp, :ftp)
           end
         end
       end
